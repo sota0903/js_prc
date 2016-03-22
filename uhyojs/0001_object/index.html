@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Object</title>
+</head>
+<body>
+
+
+  <script>
+  /*=================================================
+   クロージャ
+  =================================================*/
+  // クロージャとは
+  // クロージャとは、ある関数が作られたとき、そこの環境が関数の中で保持されることをいう
+  // 環境とは、そこの処理でどの変数が使えるかということ
+  (function () {
+      var a = 3;
+      console.log(a); // この行が実行されたときの環境では変数aが使える。それ以外にもグローバル変数が使用できる
+
+      var b = 10;
+      function aaa() {
+          console.log(b); // グローバル変数のbは使用できない
+          var b = 3;
+          console.log(a + c);
+      }
+      var c = 5;
+      aaa();
+      console.log(b);
+
+      function bbb (){
+          var a = 3;
+          var ccc = function () {
+              console.log(a);
+          };
+          ccc();
+      }
+      bbb();
+
+
+      function ddd (val) {
+          var a = 5;
+              return ccc;
+          // ddd内でccc()が作れれている
+          // cccもまたローカル変数となり、関数内でしか利用できない
+          function ccc (val) {
+              console.log(val);
+          }
+      }
+      var ccc = ddd();
+      ccc('hoge');
+
+
+      // 下記では、ggg()を通じてeee()のaを増やせるようになった
+      // ここではeee()外において、gggはaに干渉する唯一の手段となる
+      // 下記ケースでは、aを1増やすにはログを一回表示させなければならないし、aは決して5より小さくならない。
+      function eee () {
+          var a = 5;
+          return fff;
+
+          function fff () {
+              a++;
+              console.log(a);
+          }
+      }
+      var ggg = eee();
+      ggg();
+
+
+      // このようにクロージャは想定外の動作を絶対にされたくない変数を保護したり、ローカル変数の内容を関数の外に伝えたりするのに利用できる
+
+  })();
+
+
+
+  /*=================================================
+   クロージャの活用
+  =================================================*/
+  (function () {
+      // - クロージャの活用法として以前から利用されてきたものはthisと関連した使い方がある
+      function MyDiv (name) {
+          this.div = document.createElement('div');
+          this.name = name;
+          this.div.textContent = 'この要素は' + name + 'です';
+          this.div.border = '1px solid #000';
+          document.body.appendChild(this.div);
+
+          // 要素をクリックするとnameがalertされるイベントを設定する
+          this.div.addEventListener('click', (function (i) {
+              return function (e) {
+                  alert (i.name);
+              }
+          })(this), false);
+          // - 最後の(this)は関数呼び出し
+          // - 無名関数を無名関数で囲っているような感じ
+          // - 結局なにをしているかというと、クロージャを利用して実際にイベントハンドラとしてクリック時に呼ばれる関数（内側の無名関数）内でインスタンスへの参照（この場合は変数i）が保持されるようにしている
+      }
+
+      var div1 = new MyDiv('div1');
+
+      //下記も同様に動く
+      function MyDiv2 (name) {
+          this.div = document.createElement('div');
+          this.name = name;
+          this.div.textContent = 'このdiv要素は' + name + 'です';
+          this.div.style.border = '1px solid #9ff';
+          document.body.appendChild(this.div);
+
+          var t = this;
+
+          this.div.addEventListener('click', function (e) {
+              alert(t.name);
+          }, false);
+      }
+
+      var div2 = new MyDiv2('div2');
+
+
+      // 最近では下記のような「bind」メソッドが使われている
+      // bindは呼ばれる時のthis値を指定できる
+      // bindを用いると、呼ばれた時のthis値を固定できるため、第二引数に渡された関数は、this値が本来とは異なりbindの第一引数の渡したものとなる。
+      function MyDiv3 (name) {
+          this.name = name;
+          this.div = document.createElement('div');
+          this.div.textContent = 'このdiv要素は' + name + 'です';
+          document.body.appendChild(this.div);
+          this.div.addEventListener('click', (function (e) {
+            alert(this.name);
+          }).bind(this), false);
+      }
+
+      var div3 = new MyDiv3('div3');
+
+
+  })();
+  </script>
+</body>
+
+</html>

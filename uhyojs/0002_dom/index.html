@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>DOM</title>
+</head>
+<body>
+  <div id="id1">わたしはid1です</div>
+
+  <script>
+  /*
+  - console.log は alertに比べて格段に便利
+  - なぜかというと、alertは文字列しか表示できなかったのが、console.logではオブジェクトなどの詳細な情報を表示してくれるから
+  */
+
+  // HTMLの木構造
+
+  // DOMとは
+  // -> Document Object Model
+  //
+  var a = document.getElementById('id1');
+  console.log(a);
+  // document.getElementByIdで取得した要素のオブジェクトは,「HTMLElement」という種類のノードである
+
+  a.innerHTML = '<strong>わたし</strong>は<strong>id1</strong>です';
+
+  /*
+  再び木構造
+  <p>ai<strong>ue</strong>o</p>
+  p
+  │
+  ├─#text
+  ├─strong
+  │   └─#text
+  └─#text
+  */
+
+  console.log(a.parentNode);
+
+  // <body>はHTMLBodyElementという
+  // また、HTMLElementなら「tagName」というプロパティにタグ名が入っており、書き換えはできない
+
+  console.log('タグ名：' + a.parentNode.tagName);
+
+  // 子要素の取得
+  console.log(a.childNodes);
+
+  // - childNodesには子要素のリストが入っている
+  // - これはNodeListというオブジェクトで、ノードとはまた別のものである
+
+  // NodeListについて
+  // - NodeListはlengthというプロパティを持っており、これはNodeListにあるノードの数である
+  console.log('NodeListのlength：' + a.childNodes.length);
+  // itemというメソッドも持っており、このメソッドは数値の引数を1つとり、（引数）番目のノードを返す
+  console.log('item(0)：' + a.childNodes.item(0));
+
+  </script>
+</body>
+
+</html>
