@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>createElement</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <h1>DOMDOMDOM</h1>
+    </div>
+
+
+
+    <script>
+
+      // createElementメソッドでHTMLElementを作る
+      var newelement = document.createElement('p');
+      var newtextnode = document.createTextNode('新規テキストノード');
+
+      newelement.appendChild(newtextnode);
+      console.log(newelement);
+
+      document.getElementById('container').appendChild(newelement);
+
+      var nodelist = document.getElementsByTagName('h1');
+      console.log(nodelist.length);
+      console.log(nodelist[0]);
+
+
+
+
+    </script>
+  </body>
+
+</html>

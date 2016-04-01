@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>dom2</title>
+  <style>
+  strong {
+    color: #ff8200;
+  }
+  </style>
+</head>
+<body>
+  <p id="aaa">t<strong>es</strong>t</p>
+  <p id="bbb">t<strong>es</strong>t</p>
+
+
+  <script>
+
+var p = document.getElementById('aaa');
+console.log(p.childNodes);
+// => #text, strong, #textの3つのNode
+
+// childNodesの数を取得
+console.log(p.childNodes.length);
+// => 3
+
+// childNodesのnodeを、配列番号を指定して取得
+console.log(p.childNodes.item(1));
+
+
+// nodeValue を書き換える
+var textnode = p.childNodes.item(0);
+console.log(textnode.nodeValue);
+textnode.nodeValue = 'T';
+
+// このnodeValueは書き換え可能なプロパティで、代入した内容が反映される。
+
+var children = p.childNodes;
+var textnode2 = children.item(1);
+
+p.removeChild(textnode2);
+
+console.log(p.childNodes);
+
+// hasChildNodesメソッド
+// - ノードが持つメソッド
+// - 引数はない
+// - そのノードが子ノードを持っていればtrueを返し、持っていなければfalseを返す
+while (p.hasChildNodes()) {
+  p.removeChild( p.childNodes.item(0));
+}
+console.log(p.childNodes.length);
+
+
+// firstChild => childNodesを通さず一番目のノードを取得できる
+var t = document.getElementById('bbb');
+while ( t.hasChildNodes()) {
+  t.removeChild(t.firstChild);
+}
+
+
+
+
+
+  </script>
+</body>
+</html>

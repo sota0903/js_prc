@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>element</title>
+</head>
+<body>
+  <p><strong id="bbb">T</strong><span>es</span><strong id="aaa">t</strong></p>
+
+  <script>
+var aaa = document.getElementById('aaa');
+var bbb = document.getElementById('bbb');
+var prev = aaa.previousSibling;
+var next = bbb.nextSibling;
+console.log(prev.tagName);
+console.log(next);
+console.log(aaa.parentNode.childNodes); // 兄弟ノードをすべて取得
+
+var newnode = document.createElement('em');
+newnode.appendChild(document.createTextNode('置き換えるノード'));
+
+console.log(aaa.parentNode.childNodes);
+aaa.replaceChild(newnode, aaa.firstChild);
+
+var newnode2 = bbb.cloneNode(true);
+document.body.appendChild(newnode2);
+
+  </script>
+</body>
+</html>

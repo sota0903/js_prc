@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>element</title>
+</head>
+<body>
+  <p id="first" class="paragraph">T<strong>es</strong>t</p>
+  <p id="second" class="paragraph"><strong>T</strong>es<strong>t</strong></p>
+
+  <h3></h3>
+
+
+  <script>
+
+var nodelist = document.getElementsByTagName('strong');
+
+for (var i = 0; i < nodelist.length; i++) {
+  var node = nodelist.item(i);
+  node.firstChild.nodeValue = 'strong要素';
+}
+
+var nodelist2 = document.getElementsByTagName('p');
+console.log(nodelist2.item(0).id);
+console.log(nodelist2.item(0).className);
+
+var nodelist3 = document.getElementsByTagName('h3');
+var a = document.createElement('a');
+a.href = 'http://www.google.com/';
+
+var textnode = document.createTextNode('Google');
+a.appendChild(textnode);
+var h3 = nodelist3.item(0);
+
+h3.insertBefore(a, h3.firstChild);
+
+  </script>
+</body>
+</html>
