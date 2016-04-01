@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Table</title>
+</head>
+<body>
+  <table id="aaa" border="1">
+    <tr>
+      <td>test1</td>
+      <td>test2</td>
+    </tr>
+    <tr>
+      <td>test3</td>
+      <td>test4</td>
+    </tr>
+  </table>
+
+  <script>
+var table = document.getElementById('aaa');
+
+var collection = table.rows;
+console.log(collection.item(0).tagName);
+
+  </script>
+
+</body>
+</html>
