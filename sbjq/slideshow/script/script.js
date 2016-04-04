@@ -13,7 +13,7 @@
 //
 //
 //         function showNextSlide () {
-// a
+//
 //             // 次に表示するスライドのインデックス
 //             var nextIndex = (currentIndex + 1) % slideCount;
 //
@@ -36,41 +36,38 @@ $(function () {
     $('.slideshow').each(function () {
 
         // 変数の準備
-        var slideshow = {
-            container: $(this),
-            group: function () {
-                return slideshow.container.find('.slideshow__slides');
-            },
-            slides: function () {
-                return slideshow.group().find('.slide');
-            },
-            nav: function () {
-                return slideshow.container.find('.slide-nav');
-            },
-            indicator: function () {
-                return slideshow.container.find('.slide-indicator');
-            }
-        };
+        var $container = $(this); // スライドショー全体のコンテナ
+        var $slideGroup = $container.find('.slideshow__slides'); // 全スライドのまとまり
+        var $slides = $slideGroup.find('.slide'); // 各スライド
+        var $nav = $container.find('.slide-nav'); // ナビゲーション
+        var $indicator = $container.find('.slide-indicator'); // インジケーター
 
-        var slideCount = slideshow.slides.length;
-        var indicatorHTML = '';
-        var currentIndex = 0;
-        var duration = 500;
-        var easing = 'easeInOutExpo';
-        var interval = 2000;
-        var timer;
+        var slideCount = $slides.length; // スライドの点数
+        var indicatorHTML = ''; // .slide-indicatorの中に入るHTML
+        var currentIndex = 0; // 現在のスライドのインデックスを格納する。スライドショーが更新されるたびにこの変数も更新される
+        var duration = 500; // アニメーションの所要時間
+        var easing = 'linear'; // イージングの種類
+        var interval = 2000; // 次のスライドに移るまでの時間
+        var timer; // マウスがスライド上に乗ったときにオートプレイを一時停止するために使用する変数。定義のみ。
 
 
         // 要素の生成, 挿入
-        slideshow.slides().each(function (i) {
-            $(this).css({left: 100 * i + '%'});
-            indicatorHTML += '<a href="#">' + (i + 1) + '</a>';
+        $slides.each(function (i) {
+            $(this).css({left: 100 * i + '%'}); // スライドの位置を設定
+            indicatorHTML += '<a href="#">' + (i + 1) + '</a>'; // インジケーターを追加
         });
-        slideshow.indicator().html(indicatorHTML);
+        $indicator.html(indicatorHTML);
+
+
+
+        // ↓ここからスライドショーを動かす機能を実装する
+        // 必要な機能
+        // - ナビゲーションをクリックしたら1つ前もしくは1つ後のスライドを表示する
+        // - インジケーターをクリックしたら該当するスライドを表示する
+        // - 一定時間が経過したら、現在のスライドの次のスライドを表示する
 
 
         function goToSlide() {
-
         }
 
 
