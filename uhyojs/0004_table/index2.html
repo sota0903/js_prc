@@ -18,15 +18,17 @@
 
   <script>
 var table = document.getElementById('aaa');
-var collection = table.rows;
-console.log(collection.item(0).tagName);
 
-var tr = collection.item(0);
-var td = tr.cells.item(0);
 
-console.log(td);
+for (var i = 0; i < 8; i++) {
+  var newtr = table.insertRow(table.rows.length);
+  for (var k = 0; k < 2; k++) {
+    var newtd = newtr.insertCell(newtr.cells.length);
+    newtd.appendChild(document.createTextNode(k));
+  }
+}
 
-td.firstChild.nodeValue = 'テスト1テスト1';
+table.deleteRow(table.rows.length - 1);
 
 
   </script>

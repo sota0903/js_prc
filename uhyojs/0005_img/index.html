@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>img要素</title>
+  <style>
+  img {
+    max-width: 100%;
+  }
+  </style>
+</head>
+<body>
+  <img src="" alt="">
+
+  <script>
+var img = document.getElementsByTagName('img').item(0);
+img.src = '/Users/sotasuzuki/Downloads/bulma-master/images/bulma-banner.png';
+img.alt = 'bulma.io';
+img.title = 'bulma.io';
+
+var title = document.getElementsByTagName('title').item(0);
+console.log(title.text);
+
+  </script>
+</body>
+</html>

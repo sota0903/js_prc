@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Table</title>
+</head>
+<body>
+  <table id="aaa" border="1">
+    <thead>
+      <tr>
+        <th>ほげ</th>
+        <th>ほげ</th>
+      </tr>
+    </thead>
+    <tr>
+      <td>test1</td>
+      <td>test2</td>
+    </tr>
+    <tr>
+      <td>test3</td>
+      <td>test4</td>
+    </tr>
+  </table>
+
+  <script>
+var table = document.getElementById('aaa');
+
+var thead = table.createTHead();
+console.log(thead);
+
+var tfoot = table.createTFoot();
+console.log(tfoot);
+
+var tbody = table.tBodies.item(0);
+
+var newtr = tbody.insertRow(0);
+
+for (var i = 0; i < 2; i++) {
+  var newtd = newtr.insertCell(newtr.cells.length);
+  newtd.appendChild(document.createTextNode('test' + i));
+}
+
+  </script>
+
+</body>
+</html>
