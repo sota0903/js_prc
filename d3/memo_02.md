@@ -21,6 +21,10 @@ select/selectAll
   - exit: 対応する要素が余った場合 -> remove
 
 
+### each
+- 第一引数にstart/endを入れる
+- アニメーションの始めと最後に処理を行いたい場合に使用する
+
 ### memo
 - 値には関数を指定することができる
 - 要素の追加はappend
