@@ -26,6 +26,33 @@
     {id: 2, name: 'bar'}
   ]));
 
+  var dataset = [];
+  for (var i = 0; i < 30; i++) {
+    var newNumber = Math.random() * 30;
+    // dataset.push(newNumber);
+    dataset.push(newNumber);
+  }
+
+  console.log(dataset);
+
+  var svg = d3.select('body').append('svg');
+  svg
+    .attr({
+      width: 600,
+      height: 600
+    })
+    .selectAll('rect')
+    .data(dataset)
+    .enter()
+    .append('rect')
+    .attr('x', function(d, i) { return ( i * 24 ) + 'px'})
+    .attr('y', 0)
+    .attr({
+      'height': function (d) { return (d * 10) + 'px'},
+      'width': 20,
+      'style': 'fill: rgba(0,0,0, .5)'
+    });
+
 
 
   </script>
