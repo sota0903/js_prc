@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>csv / json</title>
+</head>
+<body>
+
+  <h1>csvとjsonの構造</h1>
+
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script>
+  var l = function (x) {
+    console.log(x);
+  };
+
+
+  var jsonData = [
+    { "data": "1-May-12", "close": "582.13" },
+    { "data": "1-May-12", "close": "582.13" },
+    { "data": "1-May-12", "close": "582.13" },
+    { "data": "1-May-12", "close": "582.13" },
+    { "data": "1-May-12", "close": "582.13" }
+  ];
+
+  var d3Json = d3.select('body')
+    .append('ul')
+    .selectAll('li')
+    .data(jsonData)
+    .enter()
+    .append('li')
+    .text(function (d) { return d.data + ':' + d.close; });
+
+  var sampleData = [
+    {
+      one: {
+        hoge: 1,
+        fuga: 2,
+        buzz: 3
+      },
+      two: {
+        hoge: 100,
+        fuga: 2,
+        buzz: 3
+      }
+    },
+    {
+      one: {
+        hoge: 1,
+        fuga: 2,
+        buzz: 3
+      },
+      two: {
+        hoge: 100,
+        fuga: 2,
+        buzz: 3
+      }
+    },
+    {
+      one: {
+        hoge: 1,
+        fuga: 2,
+        buzz: 3
+      },
+      two: {
+        hoge: 100,
+        fuga: 2,
+        buzz: 3
+      }
+    }
+
+  ];
+
+  var sample = d3.select('body')
+    .selectAll('p')
+    .data(sampleData)
+    .enter()
+    .append('p')
+    .transition()
+    .text(function (d) {
+      return d.one.hoge + d.one.fuga + d.one.buzz;
+    })
+    .each('end', function() {
+      d3.select(this).style('color', '#f00');
+    });
+
+  var svg = d3.select('body').append('svg');
+  var h = 600,
+      w = 600;
+  svg.attr({height: h, width: w});
+  svg.selectAll('circle')
+    .data(sampleData)
+    .enter()
+    .append('circle')
+    .attr({
+      r: 0,
+      fill: 'red'
+    })
+    .transition()
+    .delay(function (d, i) { return i * 500; })
+    .duration(1000)
+    .attr({
+      cx: function (d, i) { return 100 + (i * 200); },
+      cy: h / 2,
+      r: function (d) {return d.two.hoge; }
+    });
+
+
+  </script>
+</body>
+</html>

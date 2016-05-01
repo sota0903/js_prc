@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>_test</title>
+
+  <style>
+  .axis text {
+    font: 10px sans-serif;
+  }
+  .axis path {
+    fill: Aquamarine;
+    opacity: .1;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+  }
+  .axis line {
+    stroke: #000;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+  }
+  </style>
+</head>
+<body>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script>
+
+
+    var margin = {
+      top: 20,
+      right: 30,
+      bottom: 20,
+      left: 40
+    };
+
+    var width = 700 - margin.left - margin.right;
+    var height = 400 - margin.top - margin.bottom;
+
+    var svg = d3.select('body').append('svg')
+      .attr({
+        width: width + margin.left + margin.right,
+        height: height + margin.top + margin.bottom
+      })
+      .append('g')
+      .attr({
+        transform: 'translate(' + margin.left + ', ' + margin.top + ')'
+      });
+
+    d3.csv('timeseries.csv', function (d) {
+
+      // yScaleのために、closeの最大値を出す
+      var yMax = d3.max(d, function(d) { return + d['close']; });
+    });
+
+
+  </script>
+</body>
+</html>
