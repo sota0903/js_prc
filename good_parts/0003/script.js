@@ -31,7 +31,38 @@ var flight = {
 var status = flight.status || 'unknown';
 console.log(status);
 
-flight.equipment = {};
-// flight.equipment.model = 'testModel';
 var equipment = flight.equipment && flight.equipment.model;
 console.log(equipment);
+
+
+////////////////////////////////////////////////////////////////////////////////
+// 値の更新
+////////////////////////////////////////////////////////////////////////////////
+var stooge = {};
+
+stooge['first-name'] = 'Jerome';
+stooge.nickname = 'Curly';
+stooge['first-name'] = 'Jene';
+flight.equipment = {
+    model: 'Boeing 777'
+};
+flight.status = 'overdue';
+
+console.log(flight.equipment && flight.equipment.model);
+console.log(stooge);
+
+
+////////////////////////////////////////////////////////////////////////////////
+// 参照
+// オブジェクトは参照渡しが行われる。コピーされることはない
+////////////////////////////////////////////////////////////////////////////////
+var x = stooge;
+x.nickname = 'Coosy';
+console.log(stooge.nickname);
+
+
+////////////////////////////////////////////////////////////////////////////////
+// プロトタイプ
+// - すべてのオブジェクトはプロトタイプとリンクしていおり、そこからプロパティを継承している
+// - オブジェクトリテラルによって作られたオブジェクトはすべて、JavaScript標準のObject.prototypeオブジェクトとリンクしている
+////////////////////////////////////////////////////////////////////////////////
