@@ -38,3 +38,15 @@ var array_method_2 = function () {
 // array.pop()
 // array.push( item... )
 //   配列をスタックのように利用する
+var array_method_3 = function() {
+    var a = ['a', 'b', 'c'];
+    var b = a.pop();
+    console.log(b); // => c
+    console.log(a); // => ['a', 'b']
+
+    var c = a.push(b);
+    console.log(a); // => ['a', 'b', 'c']
+    // c => 3
+    // なぜなら、Array.push()メソッドは配列のlengthを返すから
+
+};
